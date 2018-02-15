@@ -1,42 +1,75 @@
 import {h, Component} from 'preact';
 
-
 export class CreateForm extends Component {
 
-    constructor() {
-        super();
-        this.state = {};
-    }
+  constructor() {
+    super();
+    this.state = {};
+  }
 
-    handleChange(event, field) {
-        this.setState({[field]: event.target.value});
-    }
- 
-    save() {
-        console.log(this.state);
-    }
+  handleChange(event, field) {
+    this.setState({[field]: event.target.value});
+  }
 
-    render() {
-        return (
-            <div className="create-form">
-                <div className="item-name">
-                    <input type="text" value={this.state.name} handleChange={event => this.handleChange(event, 'name')} />
-                </div>
-                <div className="item-amount">
-                    <input type="text" value={this.state.amount} handleChange={event => this.handleChange(event, 'amount')} />
-                </div>
-                <div className="item-price">
-                    <input type="text" value={this.state.price} handleChange={event => this.handleChange(event, 'price')} />
-                </div>
-                <div className="item-quality">
-                    <input type="checkbox" id="item-quality" value={this.state.hq} handleChange={event => this.handleChange(event, 'hq')} />
-                    <label for="item-quality">Is HQ?</label>
-                </div>
-                <div className="buttons">
-                    <button className="primary" onClick={() => this.save()}>Save</button>
-                    <button className="alert" onClick={() => this.reset()}>X</button>
-                </div>
-            </div>
-        )
-    }
+  save() {
+    console.log(this.state);
+  }
+
+  render() {
+    return (
+      <div className="create-form">
+        <div className="item-name">
+          <label>
+            Item name
+            <input
+              type="text"
+              value={this.state.name}
+              onChange={event => this.handleChange(event, 'name')}
+            />
+          </label>
+        </div>
+        <div className="item-amount">
+          <label>
+            Amount
+            <input
+              type="number"
+              step="1"
+              value={this.state.amount}
+              onChange={event => this.handleChange(event, 'amount')}
+            />
+          </label>
+        </div>
+        <div className="item-price">
+          <label>
+            Price
+            <input
+              type="number"
+              step="0.01"
+              value={this.state.price}
+              onChange={event => this.handleChange(event, 'price')}
+            />
+          </label>
+        </div>
+        <div className="item-quality">
+            <label for="item-quality">Is HQ</label>
+            <input
+              type="checkbox"
+              className="filled-in"
+              id="item-quality"
+              checked={this.state.hq}
+              onChange={event => this.handleChange(event, 'hq')}
+            />
+          <label for="item-quality"></label>
+        </div>
+        <div className="buttons">
+          <button className="btn" onClick={() => this.save()}>
+            <i className="material-icons">check</i>
+          </button>
+          <button className="btn red" onClick={() => this.reset()}>
+            <i className="material-icons">clear</i>
+          </button>
+        </div>
+      </div>
+    )
+  }
 }

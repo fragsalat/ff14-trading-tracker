@@ -1,7 +1,4 @@
-@function test() {
-  @return red
-}
+$roboto-font-path: '../../node_modules/materialize-css/dist/fonts/roboto/';
+@import "~materialize-css/sass/materialize";
 
-.test {
-  color: test();
-}
+@import "list";

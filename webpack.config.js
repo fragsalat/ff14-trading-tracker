@@ -15,12 +15,18 @@ module.exports = {
       }, {
         loader: "css-loader" // translates CSS into CommonJS
       }, {
-        loader: "sass-loader" // compiles Sass to CSS
+        loader: "sass-loader", // compiles Sass to CSS
       }]
     }, {
       test: /\.js$/,
       exclude: /node_modules/,
       loader: "babel-loader"
+    }, {
+      test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      loader: 'url-loader?limit=80000&mimetype=application/font-woff'
+    }, {
+      test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      loader: 'file-loader'
     }]
   },
   resolve: {

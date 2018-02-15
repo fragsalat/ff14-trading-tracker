@@ -1,0 +1,19 @@
+.create-form {
+  padding: 16px;
+  display: flex;
+  align-items: flex-end;
+  > div {
+    margin: 8px;
+    flex: 0 0 120px;
+    input[type] {
+      margin-bottom: 0;
+    }
+  }
+  .item-name {
+    flex: 1 1 50%;
+  }
+  .btn {
+    padding: 0 1rem;
+    margin: 4px;
+  }
+}
