@@ -4,9 +4,9 @@
   "description": "A minimal ELECTRON application with PREACT and WEBPACK pre-configured",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "watch": "webpack --progress --colors --watch",
-    "build": "webpack --production"
+    "start": "./node_modules/.bin/electron .",
+    "watch": "webpack --colors --watch",
+    "build": "webpack"
   },
   "repository": "https://github.com/BashCloud/preact-electron",
   "keywords": [
@@ -20,14 +20,19 @@
   "author": "Pulkit Aggarwal",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^1.4.1",
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
     "babel-preset-react": "^6.22.0",
     "babel-preset-stage-1": "^6.22.0",
+    "css-loader": "^0.28.9",
+    "foundation": "^4.2.1-1",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.20.1",
     "webpack": "^2.2.1"
   },
   "dependencies": {
+    "electron": "^1.8.2",
     "preact": "^7.2.0",
     "preact-compat": "^3.13.1",
     "preact-router": "^2.5.5"
