@@ -1,0 +1,38 @@
+.item-list {
+  flex: 1 1 70%;
+  height: calc(100vh - 118px);
+  overflow: auto;
+  td, th {
+    padding: 8px 16px;
+  }
+  .bought {
+    color: color('red', 'base');
+  }
+  .sold {
+    color: color('green', 'base');
+  }
+  .search {
+    padding: 0;
+    input {
+      margin-bottom: -1px;
+      border-color: $table-border-color;
+      display: inline-block;
+      width: calc(100% - 50px);
+      &:focus {
+        box-shadow: none;
+      }
+    }
+    .material-icons {
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+  }
+
+  .remove-btn {
+    cursor: pointer;
+    color: color('grey', 'lighten-2');
+  }
+  tr:hover .remove-btn {
+    color: color("red", "base");
+  }
+}

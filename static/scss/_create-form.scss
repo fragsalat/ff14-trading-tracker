@@ -9,6 +9,15 @@
       margin-bottom: 0;
     }
   }
+  .checkbox-wrapper {
+    line-height: 48px;
+    label {
+      vertical-align: middle;
+    }
+  }
+  .item-action {
+    flex: 0 0 70px;
+  }
   .item-name {
     flex: 1 1 50%;
   }

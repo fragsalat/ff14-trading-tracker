@@ -4,7 +4,8 @@
   "description": "A minimal ELECTRON application with PREACT and WEBPACK pre-configured",
   "main": "main.js",
   "scripts": {
-    "start": "./node_modules/.bin/electron .",
+    "start": "./node_modules/.bin/electron . --dev",
+    "debug": "ELECTRON_ENV=development ./node_modules/.bin/electron .",
     "watch": "webpack --colors --watch",
     "build": "webpack"
   },
@@ -36,6 +37,7 @@
     "webpack": "^2.2.1"
   },
   "dependencies": {
+    "chart.js": "^2.7.1",
     "electron": "^1.8.2",
     "preact": "^7.2.0",
     "preact-compat": "^3.13.1",

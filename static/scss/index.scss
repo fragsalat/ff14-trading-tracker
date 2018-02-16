@@ -1,4 +1,39 @@
+
 $roboto-font-path: '../../node_modules/materialize-css/dist/fonts/roboto/';
+
+@import "~materialize-css/sass/components/color";
+$table-striped-color: color('grey', 'darken-2');
+$select-background: color('grey', 'darken-3');
+$select-border: 1px solid color('grey', 'darken-2');
+$select-focus: $select-border;
 @import "~materialize-css/sass/materialize";
 
-@import "list";
+body {
+  color: color('grey', 'lighten-1');
+  background: color('grey', 'darken-3');
+}
+
+.app {
+  > header {
+    @import "create-form";
+    background: darken(color('grey', 'darken-3'), 5%);
+  }
+  > section {
+    display: flex;
+    align-items: flex-start;
+    @import "item-list";
+    @import "statistics";
+  }
+}
+
+::-webkit-scrollbar {
+  background-color: color('grey', 'darken-2');
+  width: 10px;
+  //border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:window-inactive,
+::-webkit-scrollbar-thumb {
+  background:  color('grey', 'darken-4');
+  //border-radius: 5px;
+}
