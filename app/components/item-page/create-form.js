@@ -1,3 +1,4 @@
+import {AddItemAction} from 'app/actions/add-item-action';
 import {h, Component} from 'preact';
 
 export class CreateForm extends Component {
@@ -17,22 +18,11 @@ export class CreateForm extends Component {
   }
 
   /**
-   * Handle change if input fields
-   * @param {KeyboardEvent} event
-   * @param {string} field
-   */
-  handleChange(event, field) {
-    this.setState({[field]: event.target.value});
-  }
-
-  /**
    * Submit current form to create a new item
    */
   save() {
-    if (typeof this.props.onSave === 'function') {
-      const item = Object.assign({created: new Date()}, this.state);
-      this.props.onSave(item);
-    }
+    const item = Object.assign({created: new Date()}, this.state);
+    new AddItemAction(item);
   }
 
   /**

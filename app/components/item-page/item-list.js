@@ -1,3 +1,5 @@
+import {FilterChangeAction} from 'app/actions/filter-change-action';
+import {RemoveItemAction} from 'app/actions/remove-item-action';
 import {h, Component} from 'preact';
 
 export class ItemList extends Component {
@@ -20,16 +22,13 @@ export class ItemList extends Component {
 
   /**
    * Handle click on remove button
-   * @param {number} index Index of item in list
+   * @param {Object} item
    */
-  removeItem(index) {
-    const item = this.state.items[index];
+  removeItem(item) {
     if (!confirm(`Do you really want to remove: ${item.name}`)) {
       return;
     }
-    if (typeof this.props.onRemove === 'function') {
-      this.props.onRemove(index);
-    }
+    new RemoveItemAction(item);
   }
 
   /**
@@ -37,9 +36,7 @@ export class ItemList extends Component {
    * @param {string} filter
    */
   changeFilter(filter) {
-    if (typeof this.props.onFilterChange === 'function') {
-      this.props.onFilterChange(filter);
-    }
+    new FilterChangeAction(filter);
   }
 
   /**
@@ -84,7 +81,7 @@ export class ItemList extends Component {
                   {item.price * item.quantity}
                 </td>
                 <td>
-                  <a class="remove-btn" onClick={event => this.removeItem(index)}>
+                  <a class="remove-btn" onClick={event => this.removeItem(item)}>
                     <i className="material-icons">close</i>
                   </a>
                 </td>
