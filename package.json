@@ -37,8 +37,11 @@
     "webpack": "^2.2.1"
   },
   "dependencies": {
+    "cap": "^0.2.0",
     "chart.js": "^2.7.1",
     "electron": "^1.8.2",
+    "electron-rebuild": "^1.7.3",
+    "node-loader": "^0.6.0",
     "preact": "^7.2.0",
     "preact-compat": "^3.13.1",
     "preact-router": "^2.5.5"

@@ -13,17 +13,8 @@ body {
   background: color('grey', 'darken-3');
 }
 
-.app {
-  > header {
-    @import "create-form";
-    background: darken(color('grey', 'darken-3'), 5%);
-  }
-  > section {
-    display: flex;
-    align-items: flex-start;
-    @import "item-list";
-    @import "statistics";
-  }
+.page {
+  @import "item-page/item-page";
 }
 
 ::-webkit-scrollbar {

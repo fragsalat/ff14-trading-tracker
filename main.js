@@ -31,9 +31,9 @@ function createWindow () {
   }));
 
   // Open the DevTools.
-  if (process.env.ELECTRON_ENV === 'development') {
+  //if (process.env.ELECTRON_ENV === 'development') {
     mainWindow.webContents.openDevTools();
-  }
+  //}
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {

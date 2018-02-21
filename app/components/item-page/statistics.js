@@ -1,5 +1,5 @@
 import {h, Component} from 'preact';
-import Chart from 'chart.js';
+import Chart from 'chart.js/src/chart';
 
 export class Statistics extends Component {
 
