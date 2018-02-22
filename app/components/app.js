@@ -1,5 +1,5 @@
 import {h, Component} from 'preact';
-import {ItemPage} from 'app/components/item-page/item-page';
+import {TradesPage} from 'app/components/trades-page/trades-page';
 import {PacketsPage} from 'app/components/packets-page/packets-page';
 import {MessagesPage} from 'app/components/messages-page/messages-page';
 
@@ -18,7 +18,7 @@ export class App extends Component {
       case 'messages': return <MessagesPage />
       case 'items':
       default:
-        return <ItemPage />;
+        return <TradesPage />;
     }
 
   }

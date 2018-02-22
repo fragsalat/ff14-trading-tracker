@@ -34,15 +34,15 @@ export class Statistics extends Component {
   }
 
   /**
-   * Group items in component state based on return value of passed callback
+   * Group trades in component state based on return value of passed callback
    * @param {Function} groupCb
    * @return {Object}
    */
-  groupItems(groupCb) {
-    return this.state.items.reduce((groups, item) => {
-      const key = groupCb(item);
+  groupTrades(groupCb) {
+    return this.state.trades.reduce((groups, trade) => {
+      const key = groupCb(trade);
       groups[key] = groups[key] || [];
-      groups[key].push(item);
+      groups[key].push(trade);
       return groups;
     }, {});
   }
@@ -51,11 +51,11 @@ export class Statistics extends Component {
    * Render the charts
    */
   renderCharts() {
-    const groupedByWeek = this.groupItems(item => {
-      const year = item.created.getFullYear();
+    const groupedByWeek = this.groupTrades(trade => {
+      const year = trade.created.getFullYear();
       const firstDayInYear = new Date(year, 0, 1);
       // Calculate week by measuring difference in days since 01. Jan of given year
-      const week = Math.ceil((item.created - firstDayInYear) / 86400000 / 7);
+      const week = Math.ceil((trade.created - firstDayInYear) / 86400000 / 7);
       return `${year} CW${week}`;
     });
     const weekData = Object.values(groupedByWeek).map(this.generateStatisticData);
@@ -99,21 +99,21 @@ export class Statistics extends Component {
   }
 
   /**
-   * Generate statistic data for a set of items
-   * @param {Array<Object>} items
+   * Generate statistic data for a set of trades
+   * @param {Array<Object>} trades
    * @return {{earned: number, paid: number, profit: number}}
    */
-  generateStatisticData(items) {
+  generateStatisticData(trades) {
     let data = {
       earned: 0,
       paid: 0,
       profit: 0
     };
-    items.forEach(item => {
-      if (item.action === 'sell') {
-        data.earned += item.quantity * item.price;
+    trades.forEach(trade => {
+      if (trade.action === 'sell') {
+        data.earned += trade.quantity * trade.price;
       } else {
-        data.paid += item.quantity * item.price;
+        data.paid += trade.quantity * trade.price;
       }
       data.profit = data.earned - data.paid;
     });
@@ -125,7 +125,7 @@ export class Statistics extends Component {
    * @return {JSX}
    */
   render() {
-    const statisticData = this.generateStatisticData(this.state.items);
+    const statisticData = this.generateStatisticData(this.state.trades);
     return (
       <div className="statistics">
         <div className="row">

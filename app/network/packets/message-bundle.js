@@ -1,6 +1,7 @@
 import zlib from 'zlib';
 import {Message} from './message';
 import {Reader} from '../reader';
+import {bufferToHex} from 'app/util/packet';
 
 export class MessageBundle {
 
@@ -20,7 +21,7 @@ export class MessageBundle {
     reader.readWord();
 
     this.data = reader.data.slice(reader.offset);
-    this.dataHex = this.data.map(byte => byte.toString(16)).join('');
+    this.dataHex = bufferToHex(this.data);
 
     if (this.encoding === 0x101) {
       const bodyData = reader.readBytes(this.length - 40);

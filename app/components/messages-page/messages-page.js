@@ -31,7 +31,7 @@ export class MessagesPage extends Component {
             {this.state.recordMessages ? 'Stop' : 'Start'} recording FFXIV Messages
           </label>
         </header>
-        {this.state.messages.reverse().map(({bundle, message, sent}) =>
+        {this.state.messages.map(({bundle, message, sent}) =>
           <div className="packet">
             {sent ? 'SEND' : 'RECV'} | {message.type} | {message.length} | {message.dataHex}
           </div>

@@ -1,8 +1,8 @@
 import {FilterChangeAction} from 'app/actions/filter-change-action';
-import {RemoveItemAction} from 'app/actions/remove-item-action';
+import {RemoveTradeAction} from 'app/actions/remove-trade-action';
 import {h, Component} from 'preact';
 
-export class ItemList extends Component {
+export class TradeList extends Component {
 
   /**
    * @param {Object} props
@@ -22,13 +22,13 @@ export class ItemList extends Component {
 
   /**
    * Handle click on remove button
-   * @param {Object} item
+   * @param {Object} trade
    */
-  removeItem(item) {
-    if (!confirm(`Do you really want to remove: ${item.name}`)) {
+  removeTrade(trade) {
+    if (!confirm(`Do you really want to remove: ${trade.item.name}`)) {
       return;
     }
-    new RemoveItemAction(item);
+    new RemoveTradeAction(trade);
   }
 
   /**
@@ -44,7 +44,7 @@ export class ItemList extends Component {
    */
   render() {
     return (
-      <div className="item-list">
+      <div className="trade-list">
         <table className="highlight">
           <thead>
             <tr>
@@ -65,23 +65,23 @@ export class ItemList extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.items.map((item, index) =>
-              <tr className="item">
+            {this.state.trades.map((trade, index) =>
+              <tr className="trade">
                 <td>
-                  {item.created.getDate()}.{item.created.getMonth()}
+                  {trade.created.getDate()}.{trade.created.getMonth()}
                   &nbsp;
-                  {item.created.getHours()}:{item.created.getMinutes()}
+                  {trade.created.getHours()}:{trade.created.getMinutes()}
                 </td>
-                <td>{item.name}</td>
-                <td>{item.quantity}</td>
-                <td>{item.price}</td>
-                <td>{item.hq ? 'yes' : 'no'}</td>
-                <td className={item.action === 'sell' ? 'sold' : 'bought'}>
-                  {item.action === 'sell' ? '+' : '-'}
-                  {item.price * item.quantity}
+                <td>{trade.item.name}</td>
+                <td>{trade.quantity}</td>
+                <td>{trade.price}</td>
+                <td>{trade.hq ? 'yes' : 'no'}</td>
+                <td className={trade.action === 'sell' ? 'sold' : 'bought'}>
+                  {trade.action === 'sell' ? '+' : '-'}
+                  {trade.price * trade.quantity}
                 </td>
                 <td>
-                  <a class="remove-btn" onClick={event => this.removeItem(item)}>
+                  <a class="remove-btn" onClick={event => this.removeTrade(trade)}>
                     <i className="material-icons">close</i>
                   </a>
                 </td>

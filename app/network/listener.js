@@ -29,24 +29,22 @@ export class NetworkListener {
     this.cap.on('packet', (length, trunctated) => {
       const ethernet = decoders.Ethernet(buffer);
       if (this.linkType === 'ETHERNET') {
+        // Decode IP header
         if (ethernet.info.type === decoders.PROTOCOL.ETHERNET.IPV4) {
           const ipv4 = decoders.IPV4(buffer, ethernet.offset);
-
+          // Decode TCP header
           if (ipv4.info.protocol === decoders.PROTOCOL.IP.TCP) {
-
             const tcp = decoders.TCP(buffer, ipv4.offset);
-            console.log(`from ${ipv4.info.srcaddr}:${tcp.info.srcport} to ${ipv4.info.dstaddr}:${tcp.info.dstport}`);
-
             const dataLength = ipv4.info.totallen - ipv4.hdrlen - tcp.hdrlen;
             const data = buffer.slice(tcp.offset, tcp.offset + dataLength);
-            const hex = Array.from(data).reduce((hex, byte) => {
-              const byteStr = byte.toString(16);
-              return hex + new Array(byteStr.length % 2 + 1).join('0') + byteStr;
-            }, '');
-            console.log(hex);
             // Notify for new packet
-            new NewPacketAction(ipv4.info, tcp.info, data).dispatch();
-            this.stream.publish(data, !!device.addresses.find(address => address.addr === ipv4.info.srcaddr));
+            const packet = {
+              ipv4Header: ipv4.info,
+              tcpHeader: tcp.info,
+              data: Array.from(data)
+            };
+            new NewPacketAction(packet).dispatch();
+            this.stream.publish(packet, !!device.addresses.find(address => address.addr === ipv4.info.srcaddr));
           }
         }
       }
