@@ -10,10 +10,11 @@ export class MessageBundle {
     this.magic2 = reader.readDWord();
     this.magic3 = reader.readDWord();
     this.epoch = new Date(reader.readQWord());
-    this.length = reader.readWord();
-    reader.readDWord();
+    this.length = reader.readDWord();
+    this.connectionType = reader.readWord();
     this.messageCount = reader.readWord();
-    this.encoding = reader.readWord();
+    reader.readByte();
+    this.encoding = reader.readByte();
     reader.readWord();
     reader.readWord();
     reader.readWord();

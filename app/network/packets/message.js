@@ -1,3 +1,4 @@
+import {MessageTypes} from 'app/network/packets/message-types';
 
 export class Message {
 
@@ -5,9 +6,10 @@ export class Message {
     this.length = reader.readDWord();
     this.actorId = reader.readDWord();
     this.userId = reader.readDWord();
+    this.segmentType = reader.readWord();
     reader.readDWord();
-    reader.readWord();
     this.type = reader.readWord();
+    this.typeName = MessageTypes.find(this.type);
     reader.readWord();
     this.seconds = reader.readWord();
     reader.readWord();

@@ -1,6 +1,6 @@
-import {MessageBundle} from '../network/packets/message-bundle';
-import {Reader} from '../network/reader';
-import {NewMessageAction} from 'app/actions/new-message-action';
+import {MessageBundle} from 'app/network/packets/message-bundle';
+import {MessageHandler} from 'app/network/packets/message-handlers';
+import {Reader} from 'app/network/reader';
 
 export class FFXIVPacketHandler {
 
@@ -15,6 +15,7 @@ export class FFXIVPacketHandler {
         console.log(`Handle message of type '${message.type}': ${message.dataHex}`);
 
         new NewMessageAction(bundle, message, sent);
+        MessageHandler.handle(message);
       });
     }
   }
