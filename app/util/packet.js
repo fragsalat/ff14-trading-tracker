@@ -1,15 +1,15 @@
 
-function zeroPad(hex) {
+export function zeroPad(hex) {
   return new Array(hex.length % 2 + 1).join('0') + hex;
 }
 
-function bufferToHex(buffer) {
+export function bufferToHex(buffer) {
   return Array.from(buffer).reduce((hex, byte) =>
     hex + zeroPad(byte.toString(16))
     , '');
 }
 
-function numberToHex(number, inversed) {
+export function numberToHex(number, inversed) {
   debugger;
   let rest = number;
   const bytes = []
