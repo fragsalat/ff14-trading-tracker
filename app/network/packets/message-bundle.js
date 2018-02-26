@@ -23,7 +23,7 @@ export class MessageBundle {
     this.data = reader.data.slice(reader.offset);
     this.dataHex = bufferToHex(this.data);
 
-    if (this.encoding === 0x101) {
+    if (this.encoding) {
       const bodyData = reader.readBytes(this.length - 40);
       const inflated = zlib.inflateSync(Buffer.from(bodyData));
       reader = new Reader(inflated);

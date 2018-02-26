@@ -3,7 +3,7 @@ import {h, Component} from 'preact';
 import {LoadTradesAction} from 'app/actions/load-trades-action';
 import {CreateForm} from './create-form'
 import {TradeList} from './trade-list'
-import {Statistics} from './statistics'
+import {TradeStatistics} from './trade-statistics'
 
 export class TradesPage extends Component {
 
@@ -35,13 +35,13 @@ export class TradesPage extends Component {
     // Sort Trades by date desc
     const sortedTrades = filteredTrades.sort((a, b) => a.created < b.created ? 1 : -1);
     return (
-      <div className="item-page">
+      <div className="trades-page">
         <header>
           <CreateForm />
         </header>
         <section>
           <TradeList trades={sortedTrades} />
-          <Statistics trades={sortedTrades} />
+          <TradeStatistics trades={sortedTrades} />
         </section>
       </div>
     )

@@ -1,0 +1,12 @@
+.trades-page {
+  > header {
+    @import "create-form";
+    background: darken(color('grey', 'darken-3'), 5%);
+  }
+  > section {
+    display: flex;
+    align-items: flex-start;
+    @import "trade-list";
+    @import "statistics";
+  }
+}

@@ -14,7 +14,8 @@ body {
 }
 
 .page {
-  @import "item-page/item-page";
+  @import "trades-page/trades-page";
+  @import "offers-page";
 }
 
 ::-webkit-scrollbar {

@@ -2,6 +2,7 @@ import {MessageBundle} from 'app/network/packets/message-bundle';
 import {MessageHandler} from 'app/network/packets/message-handler';
 import {Reader} from 'app/network/reader';
 import {bufferToHex} from 'app/util/packet';
+import {NewMessageAction} from 'app/actions/new-message-action';
 
 export class FFXIVPacketHandler {
 

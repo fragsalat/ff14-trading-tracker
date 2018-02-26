@@ -7,6 +7,16 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   target: 'electron',
+  node: {
+    __dirname: false
+  },
+  externals:  {
+    'pg' : true,
+    'pg-hstore' :true,
+    'tedious' : true,
+    'mysql2' : true,
+    "sequelize": "require('sequelize')"
+  },
   module: {
     rules: [{
       test: /\.scss$/,

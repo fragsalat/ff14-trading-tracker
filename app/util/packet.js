@@ -10,7 +10,6 @@ export function bufferToHex(buffer) {
 }
 
 export function numberToHex(number, inversed) {
-  debugger;
   let rest = number;
   const bytes = []
 

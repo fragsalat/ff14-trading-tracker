@@ -21,18 +21,22 @@
   "author": "Pulkit Aggarwal",
   "license": "MIT",
   "devDependencies": {
+    "aws-sdk": "^2.201.0",
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
     "babel-preset-react": "^6.22.0",
     "babel-preset-stage-1": "^6.22.0",
     "cap": "^0.1.2",
     "css-loader": "^0.28.9",
+    "csv-parse": "^2.0.4",
     "electron-reload": "^1.2.2",
     "file-loader": "^1.1.6",
     "materialize-css": "^0.100.2",
+    "node-pre-gyp": "^0.6.39",
     "node-sass": "^4.7.2",
     "resolve-url-loader": "^2.2.1",
     "sass-loader": "^6.0.6",
+    "sequelize": "^4.33.4",
     "style-loader": "^0.20.1",
     "url-loader": "^0.6.2",
     "webpack": "^2.2.1"
@@ -45,6 +49,7 @@
     "node-loader": "^0.6.0",
     "preact": "^7.2.0",
     "preact-compat": "^3.13.1",
-    "preact-router": "^2.5.5"
+    "preact-router": "^2.5.5",
+    "sqlite3": "^3.1.13"
   }
 }

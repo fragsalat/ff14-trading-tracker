@@ -4,9 +4,9 @@ import {database} from 'app/model/database';
 export const Item = database.define('item', {
     id: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+        primaryKey: true
     },
     name: Sequelize.STRING
+}, {
+    timestamps: false
 });
-

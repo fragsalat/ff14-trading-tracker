@@ -1,5 +1,7 @@
+import {Offer} from 'app/model/offer';
+import {bufferToHex} from 'app/util/packet';
 
-class Offer {
+class OfferEntry {
   /**
    * One offer spans 112 bytes within the offer list
    * @param {Reader} reader
@@ -24,8 +26,14 @@ class Offer {
     reader.readQWord();
     reader.readQWord();
     this.retailer = reader.readString(32);
-    this.hq = reader.readWord();
+    this.quality = reader.readWord();
     this.marketCode = reader.readWord();
+
+    this.totalPrice = this.price * this.quantity;
+
+    Offer.create(this)
+      .then(offer => console.log(`Created offer ${offer.id}`))
+      .catch(error => console.warn(`Could not create offer ${JSON.stringify(this)}`));
   }
 }
 
@@ -45,7 +53,7 @@ export class ListOffersMessage {
         break;
       }
       reader.offset -= 4; // Rewind offset before read dword
-      this.offers.push(new Offer(reader));
+      this.offers.push(new OfferEntry(reader));
     }
 
     if (reader.data.length !== reader.offset) {

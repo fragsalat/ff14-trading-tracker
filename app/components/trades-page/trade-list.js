@@ -60,7 +60,7 @@ export class TradeList extends Component {
               <th>Quantity</th>
               <th>Price</th>
               <th>HQ</th>
-              <th>Sum</th>
+              <th>Total Price</th>
               <th width="30px"></th>
             </tr>
           </thead>
@@ -68,9 +68,9 @@ export class TradeList extends Component {
             {this.state.trades.map((trade, index) =>
               <tr className="trade">
                 <td>
-                  {trade.created.getDate()}.{trade.created.getMonth()}
+                  {trade.createdAt.getDate()}.{trade.createdAt.getMonth()}
                   &nbsp;
-                  {trade.created.getHours()}:{trade.created.getMinutes()}
+                  {trade.createdAt.getHours()}:{trade.createdAt.getMinutes()}
                 </td>
                 <td>{trade.item.name}</td>
                 <td>{trade.quantity}</td>
@@ -78,7 +78,7 @@ export class TradeList extends Component {
                 <td>{trade.hq ? 'yes' : 'no'}</td>
                 <td className={trade.action === 'sell' ? 'sold' : 'bought'}>
                   {trade.action === 'sell' ? '+' : '-'}
-                  {trade.price * trade.quantity}
+                  {trade.totalPrice}
                 </td>
                 <td>
                   <a class="remove-btn" onClick={event => this.removeTrade(trade)}>

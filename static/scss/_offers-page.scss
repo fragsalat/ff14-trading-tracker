@@ -1,0 +1,32 @@
+.offers-page {
+    > header {
+      background: darken(color('grey', 'darken-3'), 5%);
+      .filter-panel {
+        padding: 16px;
+        display: flex;
+        align-items: flex-end;
+        > div {
+            margin: 8px;
+        }
+      }
+    }
+    > section {
+        display: flex;
+        align-items: flex-start;
+        .offer-list {
+            flex: 1 1 70%;
+            height: calc(100vh - 118px);
+            overflow: auto;
+            td, th {
+                padding: 8px 16px;
+            }
+        }
+        .statistics {
+            flex: 1 1 30%;
+            padding: 16px;
+            .weekly {
+                text-align: center;
+            }
+        }
+    }
+}

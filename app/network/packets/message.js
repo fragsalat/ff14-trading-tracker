@@ -10,7 +10,7 @@ export class Message {
     this.segmentType = reader.readWord();
     reader.readDWord();
     this.type = reader.readWord();
-    this.typeName = MessageHandler.types.find(this.type);
+    this.typeName = MessageHandler.types[this.type];
     reader.readWord();
     this.seconds = reader.readWord();
     reader.readWord();

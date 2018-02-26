@@ -6,7 +6,7 @@ export const MessageHandler = {
   types: {
     0x013F: InventoryModifyMessage,
     0x00E0: null, // Ping
-    0x0c01: ListOffersMessage
+    0x010c: ListOffersMessage
   },
 
   /**

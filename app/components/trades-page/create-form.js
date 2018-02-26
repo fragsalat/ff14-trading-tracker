@@ -12,13 +12,12 @@ export class CreateForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      trade: {
-        action: 'sell',
-        quantity: 0,
-        price: 0,
-        hq: 0
-      },
       itemName: null,
+      action: 'sell',
+      quantity: 0,
+      price: 0,
+      totalPrice: 0,
+      quality: 0,
       items: []
     };
   }
@@ -33,34 +32,42 @@ export class CreateForm extends Component {
       return alert('You must select an item');
     }
 
-    new AddTradeAction(this.state.trade, item);
+    const trade = {
+      action: this.state.action,
+      quantity: parseInt(this.state.quantity, 10),
+      price: parseInt(this.state.price, 10),
+      totalPrice: parseInt(this.state.totalPrice, 10),
+      quality: this.state.quality
+    };
+    new AddTradeAction(trade, item);
   }
 
   /**
    * Reset form inputs
    */
   reset() {
-    this.setState({trade: {
-      action: 'sell',
+    this.setState({
       itemName: null,
+      action: 'sell',
       quantity: 0,
       price: 0,
-      hq: 0
-    }});
+      totalPrice: 0,
+      quality: 0
+    });
   }
 
-  finditems(name) {
+  findItems(name) {
     Item.findAll({
       where: {
         name: {
           [Op.like]: `${name}%`
         }
       },
-      order: ['name', 'ASC'],
+      order: [['name', 'ASC']],
       limit: 10
-    }).then(items =>
-        this.setState({items})
-    );
+    }).then(items => {
+      this.setState({items, itemName: name})
+    });
   }
 
   /**
@@ -74,7 +81,7 @@ export class CreateForm extends Component {
           <select
             id="trade-action"
             className="browser-default"
-            onChange={event => this.setState({trade: {action: event.target.value}})}
+            onChange={event => this.setState({action: event.target.value})}
           >
             <option value="sell" selected>Sell</option>
             <option value="buy">Buy</option>
@@ -82,12 +89,12 @@ export class CreateForm extends Component {
         </div>
         <div className="trade-name">
           <label>
-            Trade name
+            Item name
             <input
               type="text"
               list="items"
-              value={this.state.trade.itemName}
-              onKeyPress={event => this.findItems(event.target.value)}
+              value={this.state.itemName}
+              onKeyUp={event => this.findItems(event.target.value)}
               onChange={event => this.setState({itemName: event.target.value})}
             />
             <datalist id="items">
@@ -103,21 +110,33 @@ export class CreateForm extends Component {
             <input
               type="number"
               step="1"
-              value={this.state.trade.quantity}
-              onChange={event => this.setState({trade: {quantity: event.target.value}})}
+              value={this.state.quantity}
+              onChange={event => this.setState({quantity: event.target.value})}
             />
           </label>
         </div>
         <div className="item-price">
-          <label>
-            {this.state.trade.action === 'sell' ? 'Total Price' : 'Price'}
-            <input
-              type="number"
-              step="0.01"
-              value={this.state.trade.price}
-              onChange={event => this.setState({trade: {price: event.target.value}})}
-            />
-          </label>
+          {this.state.action === 'sell' ?
+            <label>
+              Total Price
+              <input
+                type="number"
+                step="0.01"
+                value={this.state.totalPrice}
+                onChange={event => this.setState({totalPrice: event.target.value})}
+              />
+            </label>
+          :
+            <label>
+              Price
+              <input
+                type="number"
+                step="0.01"
+                value={this.state.price}
+                onChange={event => this.setState({price: event.target.value})}
+              />
+            </label>
+          }              
         </div>
         <div className="item-quality">
             <label for="item-quality">Is HQ</label>
@@ -126,8 +145,8 @@ export class CreateForm extends Component {
                 type="checkbox"
                 className="filled-in"
                 id="item-quality"
-                checked={this.state.trade.hq}
-                onChange={event => this.setState({trade: {hq: event.target.checked}})}
+                checked={this.state.quality}
+                onChange={event => this.setState({quality: event.target.checked})}
               />
               <label for="item-quality" />
             </div>

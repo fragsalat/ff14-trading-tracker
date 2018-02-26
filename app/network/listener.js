@@ -37,6 +37,10 @@ export class NetworkListener {
             const tcp = decoders.TCP(buffer, ipv4.offset);
             const dataLength = ipv4.info.totallen - ipv4.hdrlen - tcp.hdrlen;
             const data = buffer.slice(tcp.offset, tcp.offset + dataLength);
+            // Abort processing when no data is available
+            if (!dataLength) {
+              return;
+            }
             // Notify for new packet
             const packet = {
               ipv4Header: ipv4.info,

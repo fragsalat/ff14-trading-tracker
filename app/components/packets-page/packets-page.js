@@ -14,7 +14,6 @@ export class PacketsPage extends Component {
   }
 
   toggleRecording() {
-    debugger;
     new ToggleRecordPacketsAction();
   }
 
