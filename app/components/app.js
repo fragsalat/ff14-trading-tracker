@@ -11,6 +11,15 @@ export class App extends Component {
    */
   constructor(props) {
     super(props);
+
+    this.state = {
+      activePage: localStorage.getItem('active-page')
+    };
+  }
+
+  setPage(page) {
+    this.setState({activePage: page});
+    localStorage.setItem('active-page', page);
   }
 
   renderPage() {
@@ -35,26 +44,26 @@ export class App extends Component {
           <div className="nav-wrapper">
             <ul className="menu-items left">
               <li
-                className={`menu-item ${this.state.activePage === 'items' ? 'active' : ''}`}
-                onClick={() => this.setState({activePage: 'items'})}
+                className={`menu-item ${!this.state.activePage || this.state.activePage === 'items' ? 'active' : ''}`}
+                onClick={() => this.setPage('items')}
               >
                 <a>Items</a>
               </li>
               <li
                 className={`menu-item ${this.state.activePage === 'offers' ? 'active' : ''}`}
-                onClick={() => this.setState({activePage: 'offers'})}
+                onClick={() => this.setPage('offers')}
               >
                 <a>Offers</a>
               </li>
               <li
                 className={`menu-item ${this.state.activePage === 'packets' ? 'active' : ''}`}
-                onClick={() => this.setState({activePage: 'packets'})}
+                onClick={() => this.setPage('packets')}
               >
                 <a>Packets</a>
               </li>
               <li
                 className={`menu-item ${this.state.activePage === 'messages' ? 'active' : ''}`}
-                onClick={() => this.setState({activePage: 'messages'})}
+                onClick={() => this.setPage('messages')}
               >
                 <a>Messages</a>
               </li>

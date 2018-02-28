@@ -75,7 +75,7 @@ export class TradeList extends Component {
                 <td>{trade.item.name}</td>
                 <td>{trade.quantity}</td>
                 <td>{trade.price}</td>
-                <td>{trade.hq ? 'yes' : 'no'}</td>
+                <td>{trade.quality ? 'yes' : 'no'}</td>
                 <td className={trade.action === 'sell' ? 'sold' : 'bought'}>
                   {trade.action === 'sell' ? '+' : '-'}
                   {trade.totalPrice}

@@ -20,14 +20,14 @@ export function groupByDay(entity) {
     const year = entity.createdAt.getFullYear();
     const month = entity.createdAt.getMonth();
     const day = entity.createdAt.getDate();
-    return `${year}${month}${day}`;
+    return `${year}-${month}-${day}`;
 }
 
 export function groupByHour(entity) {
     const year = entity.createdAt.getFullYear();
     const month = entity.createdAt.getMonth();
     const day = entity.createdAt.getDate();
-    const hour = entity.createdAt.getHour();
-    return `${year}${month}${day}${hour}`;
+    const hour = entity.createdAt.getHours();
+    return `${year}-${month}-${day} ${hour}h`;
 }
 

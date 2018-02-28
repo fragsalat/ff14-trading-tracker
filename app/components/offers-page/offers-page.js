@@ -21,10 +21,9 @@ export class OffersPage extends Component {
         Offer.findAll({
             where: {itemId: item.id},
             order: [['createdAt', 'DESC']],
-        }).then(offers => {
-            debugger;
+        }).then(offers =>
             this.setState({offers})
-        });
+        );
     }
 
     render() {

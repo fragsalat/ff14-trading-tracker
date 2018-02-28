@@ -39,7 +39,7 @@ export class TradeStatistics extends Component {
    * @return {Object}
    */
   groupTrades(groupCb) {
-    return this.state.trades.reduce((groups, trade) => {
+    return this.state.trades.reverse().reduce((groups, trade) => {
       const key = groupCb(trade);
       groups[key] = groups[key] || [];
       groups[key].push(trade);

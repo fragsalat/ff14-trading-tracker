@@ -50,32 +50,51 @@ export class OfferStatistics extends Component {
    */
   render() {
     const statisticData = this.generateStatisticData(this.state.offers);
-    const groupedOffers = groupBy(this.state.offers, groupByDay);
+    const groupedOffers = groupBy(this.state.offers.reverse(), groupByDay);
     const groupedData = Object.values(groupedOffers).map(this.generateStatisticData);
-    const chartLabels = Object.keys(groupedData);
+    const chartLabels = Object.keys(groupedOffers);
     const chartData = [
+      {
+        label: 'Average',
+        fill: 'start',
+        backgroundColor : "rgba(0, 0, 0, .2)",
+        borderColor: 'rgba(0, 0, 0, .9)',
+        borderWidth: 1,
+        yAxisID: 'left',
+        data: groupedData.map(group => group.average)
+      },
       {
         label: 'Max',
         fill: 'false',
         borderColor: 'rgba(244, 67, 54, .9)',
         borderWidth: 1,
+        yAxisID: 'right',
         data: groupedData.map(group => group.max)
       },
       {
         label: 'Min',
-        fill: 'false',
+        fill: 'start',
+        backgroundColor : "rgba(76, 175, 80, .2)",
         borderColor: 'rgba(76, 175, 80, .9)',
         borderWidth: 1,
+        yAxisID: 'left',
         data: groupedData.map(group => group.min)
-      },
-      {
-        label: 'Average',
-        fill: 'start',
-        borderColor: 'rgba(0, 0, 0, .9)',
-        borderWidth: 1,
-        data: groupedData.map(group => group.average)
       }
-    ]
+    ];
+    const options = {
+      scales: {
+        yAxes: [{
+          id: 'left',
+          type: 'linear',
+          position: 'left'
+        }, {
+          id: 'right',
+          type: 'linear',
+          position: 'right'
+        }]
+      }
+    };
+
     return (
       <div className="statistics">
         <div className="row">
@@ -95,7 +114,7 @@ export class OfferStatistics extends Component {
         <div className="weekly">
           <label>Daily</label>
           <div style={{width: '30vw', height: '200px'}}>
-            <Chart labels={chartLabels} dataset={chartData} />
+            <Chart labels={chartLabels} dataset={chartData} options={options} />
           </div>
         </div>
       </div>

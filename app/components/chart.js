@@ -1,7 +1,7 @@
 import {h, Component} from 'preact';
-import Chart from 'chart.js/src/chart';
+import * as ChartJS from 'chart.js/src/chart';
 
-export class Statistics extends Component {
+export class Chart extends Component {
 
   /**
    * @param {Object} props
@@ -41,11 +41,12 @@ export class Statistics extends Component {
     if (this.chart) {
       this.chart.destroy();
     }
-    this.chart = new Chart(this.canvas, {
+    this.chart = new ChartJS(this.canvas, {
       type: 'line',
       options: {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        ...this.state.options
       },
       data: {
         labels: this.state.labels,
